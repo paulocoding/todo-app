@@ -6,13 +6,30 @@
     <title>To Do App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/todo.css">
+    <script src="js/vendor/angular.min.js" charset="utf-8"></script>
+    <script src="js/app/app.js" charset="utf-8"></script>
   </head>
-  <body ng-app="">
-    <h2>Add task</h2>
-    <input type="text" ng-model="task">
-    <h2>{{ task }}</h2>
-    <script src="vendor/angular.min.js" charset="utf-8"></script>
+  <body ng-app="todoApp">
+    <div class="container">
+      <div ng-controller="TodoListController as todoList">
+        <form ng-submit="todoList.addTodo()" class="form-inline">
+          <div class="form-group">
+            <input type="text" ng-model="todoList.todoText" name="todoText"
+                   placeholder="add new task" class="form-control">
+            <input class="btn btn-primary" type="submit" value="Add">
+          </div>
+        </form>
+        <ul class="list-unstyled">
+           <li ng-repeat="todo in todoList.list">
+               <label>
+                 <input type="checkbox" ng-model="todo.done">
+               <span  class="done-{{todo.done}}">{{ todo.name}}</span>
+               </label>
+           </li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
